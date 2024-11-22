@@ -55,6 +55,26 @@ app.delete('/api/persons/:id', (request, response)=>{
 
     response.status(204).end()
 })
+const generateId = () => {
+    return Math.floor(Math.random() * 1000000);
+}
+app.post('/api/persons', (request, response)=>{
+    const body = request.body;
+
+    if(!body.number || !body.name){
+        return response.status(400).end()
+    }
+const id = generateId();
+console.log('id', id)
+     const newPerson = {
+        id: id,
+        name: body.name,
+        number: body.number
+    }
+    persons.concat(newPerson)
+
+    response.json(newPerson)
+})
 
 app.get('/info', (request, response)=>{
     let message = `<p>Phonebook has info for ${persons.length} people</p>`
