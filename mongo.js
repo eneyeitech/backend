@@ -1,3 +1,4 @@
+require('dotenv').config() 
 const mongoose = require("mongoose");
 
 if (process.argv.length < 3) {
@@ -7,8 +8,8 @@ if (process.argv.length < 3) {
 
 const password = process.argv[2];
 
-const uri = `mongodb+srv://note:${password}@free0.conul.mongodb.net/phonebook?retryWrites=true&w=majority&appName=free0`;
-
+//const uri = `mongodb+srv://note:${password}@free0.conul.mongodb.net/phonebook?retryWrites=true&w=majority&appName=free0`;
+const uri = process.env.MONGODB_URI;
 // Function to connect to MongoDB with retries
 async function connectWithRetry(maxRetries = 5, delay = 5000) {
   let retries = maxRetries;
