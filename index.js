@@ -206,6 +206,13 @@ app.get("/info", (request, response, next) => {
     .catch(error => next(error));
 });
 
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' })
+}
+
+// handler of requests with unknown endpoint
+app.use(unknownEndpoint)
+
 
 // --- Error Handling Middleware ---
 const errorHandler = (error, request, response, next) => {
